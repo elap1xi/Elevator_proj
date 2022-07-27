@@ -42,13 +42,19 @@ el = Elevator()
 4. 리스트 정리 및 결과 출력,
     1. # 추후 입력
 
-
+    
 '''
 
 class Elevator:
     limit : 16
     order_up = []
     order_down = []
+    per = []
+
+    first = []
+    last = []
+    top = []
+
 
     ent = []
     out = []
@@ -64,6 +70,9 @@ from time import sleep
 el = Elevator()
 e_t = 0
 o_t = 0
+eote = 0
+for k in range(0, 5):
+    globals()[f'as_{k}'] = 0
 print("--------------------------------------------")
 while True:
     order = input("탑승하려는층/내리려는층(끝내려면 'end'입력) : ")
@@ -73,12 +82,30 @@ while True:
           order = order.split("/")
           el.ente.append(int(order[0]))
           el.oute.append(int(order[1]))
+          eote += 1
+          el.per.append(eote)
 
 print("탑승 목록 : ",el.ente)
 print("목적지 목록 : ",el.oute)
+print("탑승자 번호 : ",el.per)
+top_per = max(el.ente)
+el.top.append(top_per)
+for i in range(0, eote-1):
+    if(el.ente[i]==top_per):
+        el.ente.remove(top_per)
+        el.oute.remove(el.oute[i])
+        as_1 += 1
+for i in range(0, eote-as_1):
+    if (el.ente[i]<el.oute[i]):
+        el.first.append(i+1)
+    elif (el.ente[i]>el.oute[i]):
+        el.last.append(i+1)
 
-el.ente.sort()
-el.oute.sort(reverse=True)
+print("첫 탑승 : ",el.first)
+print("마지막 탑승 : ",el.last)
+print("최고층 탑승 : ",el.top)
+
+
 
 def run_elevator():
     def el_up():
@@ -121,7 +148,7 @@ def run_elevator():
                 el.location = el.ente[0]
                 
 
-'''
+
 def run_elavator():
     while True:
         def el_up():
@@ -171,4 +198,3 @@ def run_elavator():
         else:
             if(order=='end'):
                 pass # print()
-'''
