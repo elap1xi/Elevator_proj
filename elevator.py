@@ -71,8 +71,8 @@ el = Elevator()
 e_t = 0
 o_t = 0
 eote = 0
-for k in range(0, 5):
-    globals()[f'as_{k}'] = 0
+as_0 = 0
+as_1 = 0
 print("--------------------------------------------")
 while True:
     order = input("탑승하려는층/내리려는층(끝내려면 'end'입력) : ")
@@ -89,7 +89,10 @@ print("탑승 목록 : ",el.ente)
 print("목적지 목록 : ",el.oute)
 print("탑승자 번호 : ",el.per)
 top_per = max(el.ente)
-el.top.append(top_per)
+for as_0 in range(0,eote):
+    if(top_per==el.ente[as_0]):
+        el.top.append(as_0+1)
+exc_topper = len(el.top)
 for i in range(0, eote-1):
     if(el.ente[i]==top_per):
         el.ente.remove(top_per)
@@ -100,6 +103,7 @@ for i in range(0, eote-as_1):
         el.first.append(i+1)
     elif (el.ente[i]>el.oute[i]):
         el.last.append(i+1)
+el.last = [x for x in el.last if x not in el.top]
 
 print("첫 탑승 : ",el.first)
 print("마지막 탑승 : ",el.last)
